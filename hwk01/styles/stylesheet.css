@@ -314,8 +314,8 @@ body {
   
   .midpara{
     text-align: center;
-    font-family: avenir, sans-serif;
-    font-size: 1.5rem;;
+    font-family: Avenir, sans-serif;
+    font-size: 1.5rem;
     line-height: 1.75em;
     letter-spacing: 1px;
     color: rgb(0, 0, 0);
@@ -324,7 +324,7 @@ body {
   .container {
     width: 65%;
     display: block;
-    margin: 50px auto;
+    margin: 20px auto;
   }
   
 
@@ -470,6 +470,10 @@ img ~ * {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
   grid-gap: 1rem;
+}
+
+.subtitle{
+  color: #FFF;
 }
 
 
