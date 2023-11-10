@@ -128,7 +128,7 @@ body {
     background-image: url(../images/Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots.jpeg);
     background-size: cover;
     margin: 0px;
-    height: 80vw;
+    height: 75vh;
     /* width: 100vw; */
     display: flex;
     align-items: center;
@@ -139,7 +139,7 @@ body {
   
   @media(max-width:500px){
     .heroimage{
-      height: 80vw;
+      height: 70vw;
       transition: .25s all linear;
      transform: perserve 3d;
     }
@@ -169,9 +169,21 @@ body {
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
+/* @keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+} */
+
 @keyframes animate {
   0% {
     background-position: -500%;
+  }
+  45% {
+    background-position: 100%; 
   }
   100% {
     background-position: 500%;
@@ -240,11 +252,30 @@ h1.captiontitle{
     border-radius: 1rem;
     background-color: #000000;
     color: #ffffff;
-    margin: 0.5rem 3rem 0.5rem 3rem;
+    margin: 0.5rem 4rem 0.5rem 4rem;
     padding: 0.5rem;
   }
 
+@media (min-width:800px) and (max-width:1000px) {
+  .box1{
+    border-radius: 1rem;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem;
+  }
+}
 
+
+@media (max-width:500px) {
+  .box1{
+    border-radius: 1rem;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+}
 
   .rec_info{
     border-radius: 1rem;
@@ -326,11 +357,10 @@ h1.captiontitle{
       margin-right: auto;
 
       }
-      .ing_list{
+      .ing_list p{
+        text-align: center;
         font-size: 3.5vmin;
         display: block;
-        width: 70%;
-        margin-left: 1rem;
   
         }
 
@@ -378,6 +408,8 @@ h1.captiontitle{
   }
 
 
+
+
   .btn {
     border-radius: 1rem;
     font-family: inherit;
@@ -419,7 +451,7 @@ h1.captiontitle{
 	height: 100%;
 	top: 0;
 	left: 0;
-	background: #f1c47b;
+	background:#f1c47b;
 }
 
 .btn-1c:hover,
@@ -432,6 +464,16 @@ h1.captiontitle{
 	width: 100%;
 }
 
+
+@media (min-width:1000px) {
+  h2{
+    font-size: 5vmin;
+  }
+  h4{
+    font-size: 4.5vmin;
+  }
+  
+  }
 
 
   footer {
