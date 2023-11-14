@@ -369,11 +369,17 @@ h1.captiontitle{
       margin-right: auto;
 
       }
+      .ing_list {
+        display: flex;
+        justify-content: center;
+        }
+
+
       .ing_list p{
-        text-align: center;
+    
+        text-align: left;
         font-size: 3.5vmin;
         display: block;
-  
         }
 
   .rec_info h3 p{

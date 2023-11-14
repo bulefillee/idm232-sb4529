@@ -133,7 +133,7 @@ if ($results->num_rows > 0) {
                 <?php
                 // Display each ingredient in a list
                 foreach ($ingredientsList as $ingredient) {
-                    echo "<p>$ingredient</p>";
+                    echo "<li>$ingredient</li>";
                 }
                 ?>
             </ul>
