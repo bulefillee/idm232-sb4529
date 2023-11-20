@@ -24,7 +24,7 @@
 
 ?>
     <header>
-        <nav>
+        <!-- <nav>
             <ul class='nav-bar'>
                 <li class='logo'><a href='#'><img src='images/weblogo.jpg'/></a></li>
                 <input type='checkbox' id='check' />
@@ -42,229 +42,119 @@
                 </span>
                 <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
             </ul>
-        </nav>
+        </nav> -->
         </header>
 
         <div class='heroimage'>
             <div class="captioncontainer">
             <h1 class="captiontitle">
-                Ancho-Orange Chicken</h1>
+            Recipe Safari</h1>
             </div>  
         </div>
 
             <div class="container">
+            <button class="btn btn-1 btn-1c">back</button>
                 <h3 class="midpara">
-                    Full Recipe : Ancho-Orange Chicken with Kale Rice & Roasted Carrots
+                Indulge in Detail: View the Full Recipe for Flavorful Delights
                 </h3>
-                <button class="btn btn-1 btn-1c">back</button>
                 </div>
 
             <div class="body_content">
 
+        
             <?php
-$query = "SELECT * FROM `recipes` WHERE `id` = 1";
-$results = mysqli_query($db_connection, $query);
-$oneRecipe = array();
 
-if ($results->num_rows > 0) {
-    $oneRecipe = mysqli_fetch_assoc($results);
-} else {
-    echo '<p>No recipes found.</p>';
-}
-?>
+                $recipeId = 1; // Replace this with the actual recipe ID
 
-<div class="box1">
-<div class="cardtitle">
-                        <h2>From the Test Kitchen</h2>
-                       </div>
+                // Fetch the recipe information from the database
+                $query = "SELECT * FROM recipes WHERE id = $recipeId";
+                $results = mysqli_query($db_connection, $query);
+                
+                // Check if the query was successful
+                if ($results) {
+                    // Assuming you only expect one row for the given recipe ID
+                    $oneRecipe = mysqli_fetch_assoc($results);
+                
+                    // HTML output
+                    echo '<div class="box1">';
+                    echo '<div class="cardtitle">';
+                    echo '<h2>From the Test Kitchen</h2>';
+                    echo '</div>';
+                
+                    // Hero Image
+                    echo '<img class="recipe_img" src="./images/' . $oneRecipe['Main IMG'] . '" alt="Recipe Image">';
+                
+                    // Recipe Information
+                    echo '<div class="rec_info">';
+                    echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
+                    echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
+                    echo '<br>';
+                    echo '<div class="time"><h3>Cooktime: ' . $oneRecipe['Cook Time'] . '</h3></div>';
+                    echo '<div class="servings"><h3>Servings: ' . $oneRecipe['Servings'] . '</h3></div>';
+                    echo '<div class="calories"><h3>Nutrition: ' . $oneRecipe['Cal/Serving'] . ' cal/serving</h3></div>';
+                    echo '<br>';
+                    echo '<div class="desc"><h4>' . $oneRecipe['Description'] . '</h4></div>';
+                    echo '</div>';
+                    echo '</div>';
+                
+                    // Ingredients Box
+                    echo '<div class="box1">';
+                    echo '<img class="ing_img" src="./images/' . $oneRecipe['Ingredients IMG'] . '" alt="Ingredients Image">';
+                    echo '<div class="cardtitle"><h2>Ingredients</h2></div>';
+                    echo '<div class="rec_info"><br>';
+                    echo '<div class="ing_list">';
 
-<img class="recipe_img" src="./images/<?php echo $oneRecipe['Main IMG']; ?>" alt="<?php echo $oneRecipe['Title']; ?>">
+            
+          
+                    // LOOP THRU INGREDIENTS ARRAY
+                    $ingredientsArray = explode("*", $oneRecipe['All Ingredients']);
+                    echo '<ul>';
+                    foreach ($ingredientsArray as $ingredient) {
+                        echo '<li>' . $ingredient . '</li>';
+                    }
+                    echo '</ul>';
 
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                
+                    // Instructions Box
+                    echo '<div class="box1">';
+                    echo '<div class="inst_cardtitle"><h2>Instructions</h2></div>';
 
-    <div class="rec_info">
-        <div class="title">
-            <h2><?php echo $oneRecipe['Title']; ?></h2>
-        </div>
+            $stepTextArray = explode("*", $oneRecipe['All Steps']);
+            // echo '<p> Number of Step Text: ' . count($stepTextArray) . '</p>';
 
-        <div class="subtitle">
-            <h4><?php echo $oneRecipe['Subtitle']; ?></h4>
-        </div>
-        <br>
+            $stepImagesArray = explode("*", $oneRecipe['Step IMGs']);
+            // echo '<p> Number of Step Images: ' . count($stepImagesArray) . '</p>';
 
-        <div class="time">
-            <h3> Cooktime : <?php echo $oneRecipe['Cook Time']; ?></h3>
-        </div>
-
-        <div class="servings">
-            <h3> Servings: <?php echo $oneRecipe['Servings']; ?></h3>
-        </div>
-
-        <div class="calories">
-            <h3>Nutrition: <?php echo $oneRecipe['Cal/Serving']; ?> cal/serving</h3>
-        </div>
-        <br>
-
-        <div class="desc">
-            <h4><?php echo $oneRecipe['Description']; ?></h4>
-        </div>
-    </div>
-</div>
-
-<?php
-
-    // Explode the ingredients list into an array
-    $ingredientsList = explode('*', $oneRecipe['All Ingredients']);
-
-    // Trim each ingredient to remove extra spaces
-    $ingredientsList = array_map('trim', $ingredientsList);
-?>
-
-<div class="box1">
-    <img class="ing_img" src="./images/<?php echo $oneRecipe['Ingredients IMG']; ?>" alt="<?php echo $oneRecipe['image_alt']; ?>">
-
-    <div class="cardtitle">
-        <h2>Ingredients</h2>
-    </div>
-
-    <div class="rec_info">
-        <br>
-        <div class="ing_list">
-            <ul>
-                <?php
-                // Display each ingredient in a list
-                foreach ($ingredientsList as $ingredient) {
-                    echo "<li>$ingredient</li>";
+            for ($lp = 0; $lp < count($stepTextArray); $lp++) {
+                // If step starts with a number, get number minus one for image name
+                $firstChar = substr($stepTextArray[$lp], 0, 1);
+                
+                if (is_numeric($firstChar)) {
+                    consoleMsg("First Char is: $firstChar");
+                    echo '<img class="inst_img" src="./images/' . $stepImagesArray[$firstChar - 1] . '" alt="Step Image">';
                 }
-                ?>
-            </ul>
-        </div>
-    </div>
-</div>
+
+                echo '<div class="inst_info">';
+                echo '<div class="title"><h2>Step ' . ($lp + 1) . ':</h2></div>';
+                echo '<div class="desc"><h4>' . $stepTextArray[$lp] . '</h4></div>';
+                echo '</div>';
+                echo '<br>';
+            }
+
+            echo '</div>';
+            echo '</div>';
 
 
+                } else {
+                    consoleMsg("QUERY ERROR");
+                  }
 
+             ?>
 
-
-
-<div class="box1">
-                    <!-- <div class="recipe1"> -->
-                        <div class="inst_cardtitle">
-                            <h2>Instructions</h2>
-                           </div>
-       
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18594_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step1: Cook the rice</h2>
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                    <h4>Place an oven rack in the center of the oven, then preheat to 450°F. In a medium pot, combine the <strong>rice, a big pinch of salt,</strong> and <strong>1 1/2 cups of water.<strong> Heat to boiling on high. Once boiling, cover and reduce the heat to low. Cook 12 to 14 minutes, or until the water has been absorbed and the rice is tender. Turn off the heat and fluff with a fork. Cover to keep warm. </h4>
-                                </div>
-    
-                            </div>
-
-                            <br> 
-
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18622_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step2: Prepare the ingredients & make the glaze</h2>
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                    <h4>While the rice cooks, wash and dry the fresh produce. Peel the <strong>carrots;</strong> quarter lengthwise, then halve crosswise. Peel and roughly chop the <strong>garlic.</strong> Remove and discard the stems of the <strong>kale;</strong> finely chop the leaves. Using a peeler, remove the <strong>lime</strong> rind, avoiding the white pith; mince to get 2 teaspoons of zest (or use a zester). Halve the lime crosswise. Halve the <strong>orange;</strong> squeeze the juice into a bowl, straining out any seeds. Whisk in the <strong>chile paste</strong> and <strong>2 tablespoons of water</strong> until smooth</h4>
-                                    
-                                </div>
-    
-                            </div>
-                            <br> 
-
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18626_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step3: Roast the carrots</h2>
-                                 
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                    <h4>Place the <strong>sliced carrots</strong> on a sheet pan. Drizzle with olive oil and season with salt and pepper; toss to coat. Arrange in an even layer. Roast 15 to 17 minutes, or until tender when pierced with a fork. Remove from the oven.</h4>
-                               </div>
-    
-                            </div>
-                            <br> 
-
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18609_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step4: Cook the kale</h2>
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                  <h4>While the carrots roast, in a large pan (nonstick, if you have one), heat 2 teaspoons of olive oil on medium-high until hot. Add the <strong>chopped garlic</strong> and cook, stirring constantly, 30 seconds to 1 minute, or until fragrant. Add the <strong>chopped kale;</strong> season with salt and pepper. Cook, stirring occasionally, 3 to 4 minutes, or until slightly wilted. Add <strong>1/3 cup of water;</strong> season with salt and pepper. Cook, stirring occasionally, 3 to 4 minutes, or until the kale has wilted and the water has cooked off. Transfer to the pot of <strong>cooked rice.</strong> Stir to combine; season with salt and pepper to taste. Cover to keep warm. Wipe out the pan.</h4>
-                                </div>
-    
-                            </div>
-                            <br> 
-
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18639_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step5: Cook & glaze the chicken</h2>
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                    <h4>While the carrots continue to roast, pat the <strong>chicken</strong> dry with paper towels; season with salt and pepper on both sides. In the same pan, heat 2 teaspoons of olive oil on medium-high until hot. Add the seasoned chicken and cook 4 to 6 minutes on the first side, or until browned. Flip and cook 2 to 3 minutes, or until lightly browned. Add the <strong>glaze</strong> and cook, frequently spooning the glaze over the chicken, 2 to 3 minutes, or until the chicken is coated and cooked through. Turn off the heat; stir the <strong>butter</strong> and <strong>the juice of 1 lime half</strong> into the glaze until the butter has melted. Season with salt and pepper to taste.</h4>
-                                </div>
-    
-                            </div>
-                            <br> 
-
-                            <img class="inst_img" src="images/0101_FPP_Chicken-Rice_18630_WEB_retina_feature.jpg" alt="Ancho-Orange_Chicken_with_Kale_Rice_Roasted_Carrots">
-                
-    
-                            <div class="inst_info">
-    
-                                <div class="title">
-                                 <h2>Step6: Finish the rice & serve your dish</h2>
-                                </div>
-    
-                                <br>
-    
-                                <div class="desc">
-                                    <h4>To the pot of <strong>cooked rice and kale,</strong> add the <strong>lime zest, crème fraîche, raisins,</strong> and <strong>the juice of the remaining lime half.</strong> Stir to combine; season with salt and pepper to taste. Serve the <strong>glazed chicken</strong> with the finished rice and <strong>roasted carrots.</strong> Top the chicken with the remaining glaze from the pan. Enjoy!</h4>
-                                </div>
-    
-                            </div>
-                            <br> 
-
-                 </div>
-
+            
         </div>  
     
         <button class="btn btn-1 btn-1c">back</button>
