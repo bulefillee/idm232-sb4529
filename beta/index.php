@@ -138,7 +138,7 @@
                 }
 
                 echo '<div class="inst_info">';
-                echo '<div class="title"><h2>Step ' . ($lp + 1) . ':</h2></div>';
+                // echo '<div class="title"><h2>Step ' . ($lp + 1) . ':</h2></div>';
                 echo '<div class="desc"><h4>' . $stepTextArray[$lp] . '</h4></div>';
                 echo '</div>';
                 echo '<br>';
