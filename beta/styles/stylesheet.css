@@ -4,9 +4,6 @@
     box-sizing: border-box;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-
-
   @font-face {
     font-family: 'Quicksand-Regular';
     src: url('../fonts/Quicksand-Regular.ttf') format('truetype');
@@ -301,6 +298,10 @@ h1.captiontitle{
 
   }
 
+  h4{
+    font-size: 4.5vmin;
+  }
+
   .subtitle{
     color: rgb(236, 188, 133);
     text-align: center;
@@ -341,14 +342,15 @@ h1.captiontitle{
     font-size: 4.5vmin;
   }
 
-
-  .para{
-    text-align: left;
+  .ing_list li{
     font-size: 3.5vmin;
-    display: block;
-    font-family:'Quicksand-Regular';
   }
 
+
+
+  .rec_info h4{
+    font-size:4vmin;
+  }
 
   .rec_info h2 {
      color: rgb(236, 188, 133);
@@ -381,7 +383,7 @@ h1.captiontitle{
         }
 
 
-      .ing_list li{
+      .ing_list p{
     
         text-align: left;
         font-size: 3.5vmin;
@@ -494,7 +496,7 @@ h1.captiontitle{
     font-size: 5vmin;
   }
   h4{
-    font-size: 4.5vmin;
+    font-size: 3.5vmin;
   }
   
   }
