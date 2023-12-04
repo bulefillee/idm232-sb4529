@@ -138,6 +138,51 @@ li{
    padding: .5rem;
    }
 
+   .search-area {
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .search-area form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .search-area label {
+    display: none; /* Hide the label, as it's empty in your example */
+  }
+  
+  .search-area input[type="search"] {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid rgb(6, 6, 6);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+  }
+  
+  .search-area button {
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .search-area button:hover {
+    background-color: #a6b0ba;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Change the color to white for the shine effect */
+  }
+  
+  
+
 
 
  @media(max-with:500px){
@@ -416,12 +461,7 @@ transform: translateY(-50%) scale(0.98);
 
   
         
-          
-  
 
-        
-  
-  
 
 @media(max-width:800px){
 .top_box{
@@ -495,61 +535,7 @@ body {
   width:100%;
 }
 }
-/* Responsive */
-/* @media screen and (max-width: 500px) {
-.input-box {
-  margin: 0 8px;
-} 
-.input-box i {
-  left: 12px;
-  font-size: 25px;
-}
-.input-box input {
-  padding: 0 112px 0 0;
-}
-.input-box .button {
-  right: 12px;
-  font-size: 14px;
-  padding: 8px 18px;
-}
-} */
 
-/* @media(max-width:500px){
-.input-box {
-  margin-top: 80px;
-  position: relative;
-  height: 70px;
-  max-width: 50%;
-  width: 100%;
-  background: #fff;
-  margin: 0 30px 0 50px;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-} */
-
-/* @media(max-width:400px){
-.input-box {
-  position: relative;
-  height: 50px;
-  max-width: 70%;
-  width: 100%;
-  background: #fff;
-  margin: 0 30px 0 20px;
-  border-radius: 8px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-} */
-/* .card {
-background-color: #000000;
-border-radius: 0.5rem;
-padding-bottom: 1rem;
-}
-.card:hover{
-cursor: pointer;
-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 6px 12px rgba(0,0,0,0.23);
-
-} */
 .card {
 background-color: #000000;
 border-radius: 0.5rem;
