@@ -28,23 +28,31 @@
    <header>
       <nav>
           <ul class='nav-bar'>
-              <li class='logo'><a href='#'><img src='images/weblogo.jpg'/></a></li>
+              <!-- <li class='logo'><a href='index.php'><img src='images/weblogo.jpg'/></a></li> -->
+              <li class='logo <?php echo empty($filter) ? "active" : ""; ?>'><a href='index.php'><img src='images/weblogo.jpg'/></a></li>
+
               <input type='checkbox' id='check' />
               <span class="menu">
-                  <li><a href="">&lt; 30mins</a></li>
-                  <li><a href="">&gt; 30mins</a></li>
-                  <li><a href="">Vegetarian</a></li>
-                  <li><a href="">Chicken</a></li>
-                  <li><a href="">Fish</a></li>
-                  <li><a href="">Turkey</a></li>
-                  <li><a href="">Pork</a></li>
-                  <li><a href="">Beef</a></li>
-                  <li><a href="">Steak</a></li>
-  
+
+           
+
+    <li class='<?php echo ($filter == "lt30") ? "active" : ""; ?>'><a href="index.php?filter=lt30"> &lt; 30mins</a></li>
+    <li class='<?php echo ($filter == "gt30") ? "active" : ""; ?>'><a href="index.php?filter=gt30"> &gt; 30mins</a></li>
+
+            <li><a href="index.php?filter=vegetarian">Vegetarian</a></li>
+            <li><a href="index.php?filter=chicken">Chicken</a></li>
+            <li><a href="index.php?filter=fish">Fish</a></li>
+            <li><a href="index.php?filter=turkey">Turkey</a></li>
+            <li><a href="index.php?filter=pork">Pork</a></li>
+            <li><a href="index.php?filter=beef">Beef</a></li>
+            <li><a href="index.php?filter=steak">Steak</a></li>
+            
+
                   <label for="check" class="close-menu"><i class="fas fa-times"></i></label>
               </span>
               <label for="check" class="open-menu"><i class="fas fa-bars"></i></label>
           </ul>
+
       </nav>
       </header>
 
@@ -58,16 +66,24 @@
                 </h1>
             </div>  
 
-              <div class="input-box">
+              <!-- <div class="input-box">
 
                 <i class="uil uil-search"></i>
                 <input type="text" placeholder="recipes..." />
                 <button class="button">Search</button>
+              </div> -->
+
+              <div class="search-area">
+                <form action="index.php" method="POST">
+                  <label for="search"> </label>
+                  <input type="search" id="search" name="search">
+                  <button type="submit" name="submit" value="submit">Submit</button>
+                </form>
               </div>
           
           </div>
 
-        </div>
+      </div>
 
             <div class="container">
             <h4 class="midpara">
@@ -80,22 +96,64 @@
                 <ul class="card-wrapper">
 
                   <?php
+
+                    // Get all the recipes from "recipes" table in the "idm232" database
+
+                $search = $_POST['search'];
+                consoleMsg("Search is: $search");
+
+
+                $filter = $_GET['filter'];
+                consoleMsg("Filter is: $filter");
+
+
+                if (!empty($search)) {
+                  consoleMsg("Doing a SEARCH");
+                  // $query = "select * FROM recipes WHERE title LIKE '%{$search}%'";
+                  $query = "select * FROM recipes WHERE title LIKE '%{$search}%' OR subtitle LIKE '%{$search}%'";
+                  // $result = mysqli_query($connection, $query);
+                }  elseif ($filter == 'lt30') {
+                  $query = "SELECT * FROM recipes WHERE `Cook Time` < 30";
+              } elseif ($filter == 'gt30') {
+                  $query = "SELECT * FROM recipes WHERE `Cook Time` > 30";
+              }
+                elseif (!empty($filter)) {
+                  consoleMsg("Doing a FILTER");
+                  $query = "select * FROM recipes WHERE proteine LIKE '%{$filter}%'";
+                } 
+                else
+                
+                {
+                  consoleMsg("Loading ALL RECIPES");
                   $query = "SELECT * FROM recipes";
-                  $results = mysqli_query($db_connection, $query);
-                  if ($results->num_rows > 0) {
-                    while ($oneRecipe = mysqli_fetch_assoc($results)) {
-                  ?>
-                      <li class="card">
-                        <img src="./images/<?php echo $oneRecipe['Main IMG']; ?>" alt="<?php echo $oneRecipe['Title']; ?>">
-                        <h3><?php echo $oneRecipe['Title']; ?></h3>
-                        <p class="subtitle"><?php echo $oneRecipe['Subtitle']; ?></p>
-                      </li>
-                  <?php
-                    }
+                }
+          
+                          // $query = "SELECT * FROM recipes";
+                $results = mysqli_query($db_connection, $query);
+                // consoleMsg("The number of records found is:");
+                // echo $results;
+                if ($results->num_rows > 0) {
+                  consoleMsg("Query successful! number of rows: $results->num_rows");
+                  while ($oneRecipe = mysqli_fetch_array($results)) {
+
+                        $id = $oneRecipe['id'];
+
+                        // STEP 01 .. Wrap thumbnail in anchor tag
+                          echo '<a href="./detail/detail.php?recID='. $id .'">';
+
+                          echo '<li class="card">';
+                          echo '<img src="./images/' . $oneRecipe['Main IMG'] . '" alt="' . $oneRecipe['Title'] . '">';
+                          echo '<h3>' . $oneRecipe['Title'] . '</h3>';
+                          echo '<p class="subtitle">' . $oneRecipe['Subtitle'] . '</p>';
+                          echo '</li>';
+                          echo '</a>';
+                      }
                   } else {
-                    echo "No recipes found.";
+                      echo "No recipes found.";
                   }
                   ?>
+                  
+           
                   
                 </ul>
            </div>

@@ -53,7 +53,8 @@
         </div>
 
             <div class="container">
-            <button class="btn btn-1 btn-1c">back</button>
+            <!-- <button class="btn btn-1 btn-1c">back</button> -->
+            <button class="btn btn-1 btn-1c" onclick="window.location.href='../index.php'">Back</button>
                 <h3 class="midpara">
                 Indulge in Detail: View the Full Recipe for Flavorful Delights
                 </h3>
@@ -61,103 +62,107 @@
 
             <div class="body_content">
 
-        
             <?php
+// Include necessary files and initialize database connection
 
-                $recipeId = 1; // Replace this with the actual recipe ID
+// Get recipe ID from the URL
+$recipeId = $_GET['recID'];
 
-                // Fetch the recipe information from the database
-                $query = "SELECT * FROM recipes WHERE id = $recipeId";
-                $results = mysqli_query($db_connection, $query);
-                
-                // Check if the query was successful
-                if ($results) {
-                    // Assuming you only expect one row for the given recipe ID
-                    $oneRecipe = mysqli_fetch_assoc($results);
-                
-                    // HTML output
-                    echo '<div class="box1">';
-                    echo '<div class="cardtitle">';
-                    echo '<h2>From the Test Kitchen</h2>';
-                    echo '</div>';
-                
-                    // Hero Image
-                    echo '<img class="recipe_img" src="./images/' . $oneRecipe['Main IMG'] . '" alt="Recipe Image">';
-                
-                    // Recipe Information
-                    echo '<div class="rec_info">';
-                    echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
-                    echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
-                    echo '<br>';
-                    echo '<div class="time"><h3>Cooktime: ' . $oneRecipe['Cook Time'] . '</h3></div>';
-                    echo '<div class="servings"><h3>Servings: ' . $oneRecipe['Servings'] . '</h3></div>';
-                    echo '<div class="calories"><h3>Nutrition: ' . $oneRecipe['Cal/Serving'] . ' cal/serving</h3></div>';
-                    echo '<br>';
-                    echo '<div class="desc"><h4>' . $oneRecipe['Description'] . '</h4></div>';
-                    echo '</div>';
-                    echo '</div>';
-                
-                    // Ingredients Box
-                    echo '<div class="box1">';
-                    echo '<img class="ing_img" src="./images/' . $oneRecipe['Ingredients IMG'] . '" alt="Ingredients Image">';
-                    echo '<div class="cardtitle"><h2>Ingredients</h2></div>';
-                    echo '<div class="rec_info"><br>';
-                    echo '<div class="ing_list">';
+// Construct SQL query
+$query = "SELECT * FROM recipes WHERE id = $recipeId";
 
-            
-          
-                    // LOOP THRU INGREDIENTS ARRAY
-                    $ingredientsArray = explode("*", $oneRecipe['All Ingredients']);
-                    echo '<ul>';
-                    foreach ($ingredientsArray as $ingredient) {
-                        echo '<li>' . $ingredient . '</li>';
-                    }
-                    echo '</ul>';
+// Execute query
+$results = mysqli_query($db_connection, $query);
 
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                
-                    // Instructions Box
-                    echo '<div class="box1">';
-                    echo '<div class="inst_cardtitle"><h2>Instructions</h2></div>';
+// Check if there are results
+if ($results) {
+    // Check if at least one row is returned
+    if ($results->num_rows > 0) {
+        // Fetch and display details of the selected recipe
+        $oneRecipe = mysqli_fetch_assoc($results);
 
-            $stepTextArray = explode("*", $oneRecipe['All Steps']);
-            // echo '<p> Number of Step Text: ' . count($stepTextArray) . '</p>';
+        // HTML output
+        echo '<div class="box1">';
+        echo '<div class="cardtitle">';
+        echo '<h2>From the Test Kitchen</h2>';
+        echo '</div>';
 
-            $stepImagesArray = explode("*", $oneRecipe['Step IMGs']);
-            // echo '<p> Number of Step Images: ' . count($stepImagesArray) . '</p>';
+        // Hero Image
+        echo '<img class="recipe_img" src="./images/' . $oneRecipe['Main IMG'] . '" alt="Recipe Image">';
 
-            for ($lp = 0; $lp < count($stepTextArray); $lp++) {
-                // If step starts with a number, get number minus one for image name
-                $firstChar = substr($stepTextArray[$lp], 0, 1);
-                
-                if (is_numeric($firstChar)) {
-                    consoleMsg("First Char is: $firstChar");
-                    echo '<img class="inst_img" src="./images/' . $stepImagesArray[$firstChar - 1] . '" alt="Step Image">';
-                }
+        // Recipe Information
+        echo '<div class="rec_info">';
+        echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
+        echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
+        echo '<br>';
+        echo '<div class="time"><h3>Cooktime: ' . $oneRecipe['Cook Time'] . '</h3></div>';
+        echo '<div class="servings"><h3>Servings: ' . $oneRecipe['Servings'] . '</h3></div>';
+        echo '<div class="calories"><h3>Nutrition: ' . $oneRecipe['Cal/Serving'] . ' cal/serving</h3></div>';
+        echo '<br>';
+        echo '<div class="desc"><h4>' . $oneRecipe['Description'] . '</h4></div>';
+        echo '</div>';
+        echo '</div>';
 
-                echo '<div class="inst_info">';
-                // echo '<div class="title"><h2>Step ' . ($lp + 1) . ':</h2></div>';
-                echo '<div class="desc"><h4>' . $stepTextArray[$lp] . '</h4></div>';
-                echo '</div>';
-                // echo '<br>';
+        // Ingredients Box
+        echo '<div class="box1">';
+        echo '<img class="ing_img" src="./images/' . $oneRecipe['Ingredients IMG'] . '" alt="Ingredients Image">';
+        echo '<div class="cardtitle"><h2>Ingredients</h2></div>';
+        echo '<div class="rec_info"><br>';
+        echo '<div class="ing_list">';
+
+        // LOOP THRU INGREDIENTS ARRAY
+        $ingredientsArray = explode("*", $oneRecipe['All Ingredients']);
+        echo '<ul>';
+        foreach ($ingredientsArray as $ingredient) {
+            echo '<li>' . $ingredient . '</li>';
+        }
+        echo '</ul>';
+
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+
+        // Instructions Box
+        echo '<div class="box1">';
+        echo '<div class="inst_cardtitle"><h2>Instructions</h2></div>';
+
+        $stepTextArray = explode("*", $oneRecipe['All Steps']);
+        $stepImagesArray = explode("*", $oneRecipe['Step IMGs']);
+
+        for ($lp = 0; $lp < count($stepTextArray); $lp++) {
+            // If step starts with a number, get number minus one for image name
+            $firstChar = substr($stepTextArray[$lp], 0, 1);
+
+            if (is_numeric($firstChar)) {
+                consoleMsg("First Char is: $firstChar");
+                echo '<img class="inst_img" src="./images/' . $stepImagesArray[$firstChar - 1] . '" alt="Step Image">';
             }
 
+            echo '<div class="inst_info">';
+            echo '<div class="desc"><h4>' . $stepTextArray[$lp] . '</h4></div>';
             echo '</div>';
-            echo '</div>';
+        }
+
+        echo '</div>';
+        echo '</div>';
+    } else {
+        echo 'Recipe not found.';
+    }
+} else {
+    echo 'Query error.';
+}
+?>
 
 
-                } else {
-                    consoleMsg("QUERY ERROR");
-                  }
+        
 
-             ?>
 
             
         </div>  
     
-        <button class="btn btn-1 btn-1c">back</button>
+        <!-- <button class="btn btn-1 btn-1c">back</button> -->
+        <button class="btn btn-1 btn-1c" onclick="window.location.href='../index.php'">Back</button>
+
         
     <footer> &copy;Sue Batham | 2023 </footer>
 </body>

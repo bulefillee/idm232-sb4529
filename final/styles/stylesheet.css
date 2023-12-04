@@ -147,6 +147,20 @@ li{
     transform: perserve 3d;
   }
 
+  
+  button, input, .filters label {
+    font-family: 'Karla', sans-serif;
+    font-size: 1rem;
+    color:  var(--color-text);
+    max-width: 80ch;
+    letter-spacing: .05rem;
+    line-height: 1.6;
+    margin: .5rem;
+    padding: .5rem;
+    }
+
+  
+
   @media(max-with:500px){
     
     .heroimage {
