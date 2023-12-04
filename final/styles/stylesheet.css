@@ -1,5 +1,5 @@
 * {
-    /* border: 1px solid red; */
+  
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -148,16 +148,67 @@ li{
   }
 
   
-  button, input, .filters label {
-    font-family: 'Karla', sans-serif;
-    font-size: 1rem;
-    color:  var(--color-text);
-    max-width: 80ch;
-    letter-spacing: .05rem;
-    line-height: 1.6;
-    margin: .5rem;
-    padding: .5rem;
-    }
+
+/* Styles for the search area */
+.search-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Styles for the search input */
+.search-area input {
+  flex: 2;
+  width: calc(100% - 1rem); /* Adjust width and add padding */
+  padding: 0.5rem;
+  border: 2px solid #ccc; /* Add border for visual separation */
+  border-radius: 5px;
+  outline: none; /* Remove the blue outline on focus */
+}
+
+/* Styles for the search button */
+.search-area button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-family: 'Quicksand-Regular', sans-serif;
+}
+
+@media (min-width: 601px) {
+  /* Adjust styles for larger screens */
+  .search-area {
+    flex-direction: row; /* Display items in a row */
+  }
+
+  /* Reset width for the button in larger screens */
+  .search-area button {
+    width: auto; /* Reset width to auto */
+    margin-left: 0.5rem; /* Add some spacing between input and button */
+  }
+}
+
+/* Media query for screens 600px and below */
+@media (max-width: 600px) {
+  .search-area {
+    flex-direction: column;
+    padding-right: 1rem;
+  }
+
+  .search-area input {
+    width: 100%;
+    margin-bottom: 0.5rem; /* Add margin between input and button */
+  }
+}
+
+
+
+
+
+
 
   
 
@@ -389,7 +440,7 @@ li{
 
 } */
 
-.input-box {
+/* .input-box {
   position: relative;
   height: 76px;
   max-width: 900px;
@@ -436,13 +487,13 @@ li{
   transform: translateY(-50%) scale(0.98);
 }
 
-@media(min-width:800px){
+/* @media(min-width:800px){
   .top_box{
     display: flex;
     flex-direction: row;
     width:80%;
   }
-}
+} */
 
 @media(max-width:800px){
   .top_box{
@@ -452,10 +503,10 @@ li{
   }
   .input-box {
     height: 50px;
-    /* max-width: 900px; */
+
     width: 100%;
     background: #fff;
-    /* margin: 0 20px; */
+
     border-radius: 8px;
     padding: 0;
     margin: 0;
@@ -503,24 +554,19 @@ li{
 
 @media(max-width:370px){
   body {
-    margin-left: 0; /* Remove left margin */
-    margin-right: 0; /* Remove right margin */
+    margin-left: 0; 
+    margin-right: 0;
   }
 
-  .top_box{
-    display: flex;
-    flex-direction: column;
-    width:90%;
-  }
-}
+} */
 
-@media(max-width:369px)and(min-width:320px){
+/* @media(max-width:369px)and(min-width:320px){
   .top_box{
     display: flex;
     flex-direction: column;
     width:100%;
   }
-}
+} */
 /* Responsive */
 
 /* @media screen and (max-width: 500px) {
@@ -594,6 +640,7 @@ li{
   border-radius: 0.5rem;
   padding-bottom: 1rem;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  height: 100%;
 }
 
 .card:hover {
@@ -638,9 +685,10 @@ img ~ * {
 
 .card-wrapper {
   list-style: none;
-  padding: 1rem;
+  padding:1rem;
   margin: 1rem;
   display: grid;
+  grid-template-columns: repeat(4, minmax(30ch, 1fr));
   grid-gap: 1.5rem;
 }
 
@@ -651,16 +699,38 @@ img ~ * {
   }
 }
 
-/* For screens below 1200px, use auto-fit */
-@media (max-width: 1199px) {
+/* For screens between 900px and 1199px */
+@media (min-width: 851px) and (max-width: 1199px) {
   .card-wrapper {
-    grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+    grid-template-columns: repeat(3, minmax(30ch, 1fr));
+  }
+}
+
+/* For screens between 600px and 899px */
+@media (min-width: 600px) and (max-width: 850px) {
+  .card-wrapper {
+    grid-template-columns: repeat(2, minmax(30ch, 1fr));
+  }
+}
+
+/* For screens below 600px */
+@media (max-width: 599px) {
+  .card-wrapper {
+    grid-template-columns: minmax(30ch, 1fr);
   }
 }
 
 
+
 .subtitle{
   color: #FFF;
+}
+
+/* Remove underlines for anchor tags inside .card h3 and .subtitle */
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 

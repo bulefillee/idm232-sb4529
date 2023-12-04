@@ -36,8 +36,9 @@
 
            
 
-    <li class='<?php echo ($filter == "lt30") ? "active" : ""; ?>'><a href="index.php?filter=lt30"> &lt; 30mins</a></li>
-    <li class='<?php echo ($filter == "gt30") ? "active" : ""; ?>'><a href="index.php?filter=gt30"> &gt; 30mins</a></li>
+              <li class='<?php echo ($filter == "lte30") ? "active" : ""; ?>'><a href="index.php?filter=lte30"> &le; 30mins</a></li>
+<li class='<?php echo ($filter == "gte30") ? "active" : ""; ?>'><a href="index.php?filter=gte30"> &ge; 30mins</a></li>
+
 
             <li><a href="index.php?filter=vegetarian">Vegetarian</a></li>
             <li><a href="index.php?filter=chicken">Chicken</a></li>
@@ -73,13 +74,24 @@
                 <button class="button">Search</button>
               </div> -->
 
-              <div class="search-area">
+              <!-- <div class="search-area">
                 <form action="index.php" method="POST">
-                  <label for="search"> </label>
-                  <input type="search" id="search" name="search">
+                  <label for="search"></label>
+                  <input type="search" id="search" name="search" placeholder="Search...">
                   <button type="submit" name="submit" value="submit">Submit</button>
                 </form>
-              </div>
+              </div> -->
+
+               <div class="search-area">
+                  <form action="index.php" method="POST">
+                      <div class="search-container">
+                          <input type="search" id="search" name="search" placeholder="Search...">
+                          <button type="submit" name="submit" value="submit">Submit</button>
+                      </div>
+                  </form>
+                </div>
+
+
           
           </div>
 
@@ -112,11 +124,11 @@
                   // $query = "select * FROM recipes WHERE title LIKE '%{$search}%'";
                   $query = "select * FROM recipes WHERE title LIKE '%{$search}%' OR subtitle LIKE '%{$search}%'";
                   // $result = mysqli_query($connection, $query);
-                }  elseif ($filter == 'lt30') {
-                  $query = "SELECT * FROM recipes WHERE `Cook Time` < 30";
-              } elseif ($filter == 'gt30') {
-                  $query = "SELECT * FROM recipes WHERE `Cook Time` > 30";
-              }
+                } elseif ($filter == 'lte30') {
+                  $query = "SELECT * FROM recipes WHERE `Cook Time` <= 30";
+              } elseif ($filter == 'gte30') {
+                  $query = "SELECT * FROM recipes WHERE `Cook Time` >= 30";
+              }              
                 elseif (!empty($filter)) {
                   consoleMsg("Doing a FILTER");
                   $query = "select * FROM recipes WHERE proteine LIKE '%{$filter}%'";
