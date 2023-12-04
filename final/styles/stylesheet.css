@@ -141,7 +141,7 @@ li{
    .search-area {
     display: flex;
     align-items: center;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
   }
   
@@ -178,8 +178,21 @@ li{
   }
   
   .search-area button:hover {
-    background-color: #a6b0ba;
+    background-color: rgb(177, 116, 42);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Change the color to white for the shine effect */
+  }
+
+  @media (min-width: 601px) {
+   
+    .search-area {
+      flex-direction: row; 
+    }
+  
+  
+    .search-area button {
+      width: auto; 
+      margin-left: 0.5rem; 
+    }
   }
    
     @media (max-width: 600px) {
@@ -193,8 +206,8 @@ li{
         margin-bottom: 0.5rem; 
       }
     }
-  
 
+  
 
  @media(max-with:500px){
 
