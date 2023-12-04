@@ -556,7 +556,7 @@ li{
 } */
 
 
-.card {
+/* .card {
   background-color: #000000;
   border-radius: 0.5rem;
   padding-bottom: 1rem;
@@ -564,8 +564,22 @@ li{
 
 .card:hover{
   cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 6px 12px rgba(0,0,0,0.23);
   
+} */
+.card {
+  background-color: #000000;
+  border-radius: 0.5rem;
+  padding-bottom: 1rem;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
 
 .card > :last-child {
   margin-bottom: 0;
@@ -575,7 +589,7 @@ li{
   font-family: 'Quicksand-Regular';
   margin-top: 1rem;
   font-size: 1.25rem;
-  color: #e17634;
+  color: #f68b48;
 }
 
 
