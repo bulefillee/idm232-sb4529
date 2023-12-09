@@ -118,6 +118,38 @@ li{
     box-shadow: #181818;
 } */
 
+hr {
+  border: none;
+  height: 2px;
+  background-color: #c09f76;
+  width: 70%; 
+  margin: 2rem auto;
+}
+
+@media(min-width: 1300px){
+  hr {
+    border: none;
+    height: 2px;
+    background-color: #c09f76;
+    width: 70%; 
+    margin: 3rem auto;
+  }
+  }
+
+@media(max-width: 700px){
+hr {
+  border: none;
+  height: 2px;
+  background-color: #c09f76;
+  width: 70%; 
+  margin: 1.5rem auto;
+}
+.inst_img{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+}
+
  
 body {
     padding: 0px;
@@ -385,13 +417,15 @@ h1.captiontitle{
 
       }
       .ing_list {
+        margin-left: auto;
+        margin-right: auto;
+        max-width:60%;
         display: flex;
         justify-content: center;
         }
 
 
       .ing_list p{
-    
         text-align: left;
         font-size: 3.5vmin;
         display: block;
@@ -413,6 +447,7 @@ h1.captiontitle{
   
   .inst_img{
     margin-top: 2rem;
+    margin-bottom: 1.5rem;
     display: block;
     width: 100%;
     height: auto;
@@ -530,6 +565,17 @@ h1.captiontitle{
   }
   
   }
+
+  .no-recipes-msg {
+    text-align: center;
+}
+
+.sad-emoji {
+    display: block;
+    margin: 0 auto;
+    /* Add any additional styles for centering the SVG */
+}
+
 
 
   footer {

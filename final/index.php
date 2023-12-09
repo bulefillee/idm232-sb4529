@@ -66,7 +66,7 @@
                 <form action="index.php" method="POST">
                   <label for="search"></label>
                   <input type="search" id="search" name="search">
-                  <button type="submit" name="submit" value="submit">Submit</button>
+                  <button type="submit" name="submit" value="submit">Search</button>
                 </form>
                 </div>
 
@@ -125,16 +125,34 @@
                 echo '</li>';
                 echo '</a>';
             }
-        } else {
-            echo "No recipes found.";
         }
+        else {
+          if (!empty($search)) {
+              echo '<div class="no-recipes-msg">';
+              echo '<svg class="sad-emoji" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>';
+              echo '<h2>No recipes found for \'' . $search . '\'</h2>';
+              echo '</div>';
+          } else {
+            echo '<h2>No recipes found</h2>';
+          }
+      }
+      
+      
+        // else {
+        //   if (!empty($search)) {
+        //       echo "No recipes found for '$search'.";
+        //   } else {
+        //     echo '<h2>No recipes found</h2>';
+        //   }
+        // }
         ?>
         
- 
+
         
       </ul>
  </div>
 </main>
+
 <footer> &copy;Sue Batham | 2023 </footer>
 </body>
 </html>

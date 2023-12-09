@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles/stylesheet.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Sue Batham IDM232 Beta</title>
+    <title>Sue Batham IDM232 Recipe page</title>
 </head>
 <body>
 <?php
@@ -54,7 +54,7 @@
 
             <div class="container">
             <!-- <button class="btn btn-1 btn-1c">back</button> -->
-            <button class="btn btn-1 btn-1c" onclick="window.location.href='../index.php'">Back</button>
+            <button class="btn btn-1 btn-1c" onclick="window.history.back()">Back</button>
                 <h3 class="midpara">
                 Indulge in Detail: View the Full Recipe for Flavorful Delights
                 </h3>
@@ -84,7 +84,9 @@ if ($results) {
         // HTML output
         echo '<div class="box1">';
         echo '<div class="cardtitle">';
-        echo '<h2>From the Test Kitchen</h2>';
+        // echo '<h2>From the Test Kitchen</h2>';
+        echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
+        echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
         echo '</div>';
 
         // Hero Image
@@ -92,8 +94,8 @@ if ($results) {
 
         // Recipe Information
         echo '<div class="rec_info">';
-        echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
-        echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
+        // echo '<div class="title"><h2>' . $oneRecipe['Title'] . '</h2></div>';
+        // echo '<div class="subtitle"><h4>' . $oneRecipe['Subtitle'] . '</h4></div>';
         echo '<br>';
         echo '<div class="time"><h3>Cooktime: ' . $oneRecipe['Cook Time'] . '</h3></div>';
         echo '<div class="servings"><h3>Servings: ' . $oneRecipe['Servings'] . '</h3></div>';
@@ -135,16 +137,21 @@ if ($results) {
 
             if (is_numeric($firstChar)) {
                 consoleMsg("First Char is: $firstChar");
+                echo '<hr>';
                 echo '<img class="inst_img" src="./images/' . $stepImagesArray[$firstChar - 1] . '" alt="Step Image">';
             }
 
             echo '<div class="inst_info">';
             echo '<div class="desc"><h4>' . $stepTextArray[$lp] . '</h4></div>';
             echo '</div>';
+
+           
         }
 
         echo '</div>';
         echo '</div>';
+
+
     } else {
         echo 'Recipe not found.';
     }
@@ -152,18 +159,12 @@ if ($results) {
     echo 'Query error.';
 }
 ?>
-
-
-        
-
-
             
         </div>  
-    
         <!-- <button class="btn btn-1 btn-1c">back</button> -->
-        <button class="btn btn-1 btn-1c" onclick="window.location.href='../index.php'">Back</button>
-
-        
+        <!-- <button class="btn btn-1 btn-1c" onclick="window.location.href='../index.php'">Back</button> -->
+        <button class="btn btn-1 btn-1c" onclick="window.history.back()">Back</button>
+ 
     <footer> &copy;Sue Batham | 2023 </footer>
 </body>
 </html>

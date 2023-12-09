@@ -89,7 +89,8 @@ padding: 0;
       justify-content: center;
       overflow-y: auto;
       width: 80%;
-      padding-top: 2rem;
+      padding-top: 5rem;
+      padding-bottom: 4rem;
       height: 100vh;
       position: fixed;
       top: 0;
@@ -98,7 +99,7 @@ padding: 0;
       background-color: var(--color2);
       transition: all 0.2s ease-in-out;
   }
-  .menu li {margin-top: 40px;}
+   .menu li {margin-top: 20px;}
   .menu li a {padding: 10px;}
   .open-menu , .close-menu {display: block;}
   #check:checked ~ .menu {right: 0;}
@@ -117,7 +118,7 @@ li{
   background-image: url(../images/hero_img.jpg);
   background-size: cover;
   margin: 0px;
-  height: 50vw;
+  height: 35vw;
   width: auto;
   display: flex;
   align-items: center;
@@ -178,7 +179,8 @@ li{
   }
   
   .search-area button:hover {
-    background-color: rgb(177, 116, 42);
+    background-color: rgb(67, 65, 65);
+    
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Change the color to white for the shine effect */
   }
 
